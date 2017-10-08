@@ -21055,7 +21055,7 @@ var App = function (_React$Component) {
                 _react2.default.createElement(
                     _modules.Container,
                     null,
-                    _react2.default.createElement(_modules.Input, { elid: "todo-text", onChange: this.onInputChage, keyPress: this.addToList, value: this.state.todoText, placeholder: "Enter Tasks " }),
+                    _react2.default.createElement(_modules.Input, { elid: "todo-text", onChange: this.onInputChage, keyPress: this.addToList, value: this.state.todoText, placeholder: "Enter one " }),
                     _react2.default.createElement(_modules.Panel, { dataList: this.state.todos, mark: this.markTodo, remove: this.removeTodo })
                 )
             );
