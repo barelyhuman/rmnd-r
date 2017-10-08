@@ -21022,6 +21022,13 @@ var App = function (_React$Component) {
                 todos: a
             });
             localStorage.setItem('todos', JSON.stringify(a));
+        }, _this.unmarkTodo = function (id) {
+            var a = _this.state.todos;
+            a[id].marked = false;
+            _this.setState({
+                todos: a
+            });
+            localStorage.setItem('todos', JSON.stringify(a));
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
     //App State
@@ -21056,7 +21063,7 @@ var App = function (_React$Component) {
                     _modules.Container,
                     null,
                     _react2.default.createElement(_modules.Input, { elid: "todo-text", onChange: this.onInputChage, keyPress: this.addToList, value: this.state.todoText, placeholder: "Enter one " }),
-                    _react2.default.createElement(_modules.Panel, { dataList: this.state.todos, mark: this.markTodo, remove: this.removeTodo })
+                    _react2.default.createElement(_modules.Panel, { dataList: this.state.todos, unMark: this.unmarkTodo, mark: this.markTodo, remove: this.removeTodo })
                 )
             );
         }
@@ -21201,7 +21208,13 @@ function Panel(props) {
                             return props.mark(index);
                         } },
                     _react2.default.createElement("span", { className: "oi", "data-glyph": "check" })
-                ) : null,
+                ) : _react2.default.createElement(
+                    _button2.default,
+                    { onClick: function onClick() {
+                            return props.unMark(index);
+                        } },
+                    _react2.default.createElement("span", { className: "oi", "data-glyph": "x" })
+                ),
                 _react2.default.createElement(
                     _button2.default,
                     { onClick: function onClick() {

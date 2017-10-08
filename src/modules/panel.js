@@ -7,9 +7,14 @@ export default function Panel(props) {
         <div key={index} className="panel">
             <Text value={item.value} slice={item.marked}/>
             <div className="btn-container">
-            {!item.marked?<Button onClick={()=>props.mark(index)}>
+            {!item.marked
+            ?<Button onClick={()=>props.mark(index)}>
                 <span className="oi" data-glyph="check"></span>
-            </Button>:null}
+            </Button>
+            :<Button onClick={()=>props.unMark(index)}>
+                <span className="oi" data-glyph="x"></span>
+            </Button>
+            }
             <Button onClick={()=>props.remove(index)}>
                 <span className="oi" data-glyph="trash"></span>
             </Button>

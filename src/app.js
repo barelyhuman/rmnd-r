@@ -69,13 +69,22 @@ class App extends React.Component {
         localStorage.setItem('todos',JSON.stringify(a));
     }
 
+    unmarkTodo=(id)=>{
+        var a = this.state.todos;
+        a[id].marked=false;
+        this.setState({
+            todos:a
+        });
+        localStorage.setItem('todos',JSON.stringify(a));
+    }
+
     //Render Method
     render() {
         return (
             <div id="app">
                 <Container>
                     <Input elid="todo-text" onChange={this.onInputChage} keyPress={this.addToList} value={this.state.todoText} placeholder="Enter one " />
-                    <Panel dataList={this.state.todos} mark={this.markTodo} remove={this.removeTodo} />
+                    <Panel dataList={this.state.todos} unMark={this.unmarkTodo} mark={this.markTodo} remove={this.removeTodo} />
                 </Container>
             </div>
         );
