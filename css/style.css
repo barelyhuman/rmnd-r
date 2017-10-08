@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding:0;
+}
+
+html,body,#root,#app{
+    height:100%;
+    width: 100%;
+}
+
+body{
+    background:#121212;
+}
+
+.container{
+    border:1px solid #0a0a0a;
+    background:#0f0f0f;
+    width:40%;
+    margin:0 auto;
+    min-height:75px;
+    padding:40px;
+}
+
+.container>.input{
+    width:99%;
+}
+
+.input{
+    font-family: "Montserrat";
+    font-weight: 400;
+    padding:8px;
+    outline:none;
+    border:0;
+    background: transparent;
+    border-bottom:2px solid #444;
+    font-size:16px;
+    color:#ddd;
+}
+
+.input:focus{
+    border-color: #bada55;
+    color:#bada55;
+}
+
+.panel-container{
+    margin-top: 16px;
+    width:100%;
+}
+
+.panel{
+    width:100%;
+    background: transparent;
+    border-left:3px solid #bada55;
+    height:42px;
+    display: flex;
+    align-items: center;
+    margin-top:12px;
+    padding:8px;
+    color:#ddd;
+}
+
+
+.panel>.btn-container{
+    margin-left:auto;
+    display:flex;
+    align-items: center;
+}
+
+.btn{
+    height:16px;
+    width:16px;
+    padding:8px;
+    color:#ddd;
+}
+
+.btn:hover{
+    color:#bada55;
+}
+
+.text{
+    font-size:18px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    padding-right:10px;
+}
+
+.marked{
+    text-decoration: line-through;
+}
