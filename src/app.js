@@ -74,7 +74,7 @@ class App extends React.Component {
         return (
             <div id="app">
                 <Container>
-                    <Input elid="todo-text" onChange={this.onInputChage} keyPress={this.addToList} value={this.state.todoText} placeholder="Enter Tasks " />
+                    <Input elid="todo-text" onChange={this.onInputChage} keyPress={this.addToList} value={this.state.todoText} placeholder="Enter one " />
                     <Panel dataList={this.state.todos} mark={this.markTodo} remove={this.removeTodo} />
                 </Container>
             </div>
