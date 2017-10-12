@@ -13,8 +13,6 @@ body{
 }
 
 .container{
-    border:1px solid #0a0a0a;
-    background:#0f0f0f;
     width:40%;
     margin:0 auto;
     min-height:75px;
