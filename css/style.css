@@ -90,4 +90,5 @@ body{
 
 .marked{
     text-decoration: line-through;
+    color: #666;
 }
