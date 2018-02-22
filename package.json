@@ -16,7 +16,7 @@
     "browserify": "^14.4.0",
     "watchify": "^3.9.0"
   },
-  "scripts":{
-   "watch":"watchify src/app.js -v -t babelify -o dist/app.js" 
+  "scripts": {
+    "watch": "watchify src/app.js -v -t babelify -o dist/app.js"
   }
 }
