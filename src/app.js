@@ -36,14 +36,15 @@ class App extends React.Component {
         alert("Empty Task Field");
         return;
       }
-      const a = this.state.todos;
+      const a = this.state.todos.slice();
       a.push({
         id: this.state.todos.length,
         value: this.state.todoText,
         marked: false
       });
+      const {marked,unmarked}=markedAndUnmarked(a);
       this.setState({
-        todos: a,
+        todos: [...unmarked,...marked],
         todoText: ""
       });
 

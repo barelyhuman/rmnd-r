@@ -20995,14 +20995,19 @@ var App = function (_React$Component) {
           alert("Empty Task Field");
           return;
         }
-        var a = _this.state.todos;
+        var a = _this.state.todos.slice();
         a.push({
           id: _this.state.todos.length,
           value: _this.state.todoText,
           marked: false
         });
+
+        var _markedAndUnmarked = markedAndUnmarked(a),
+            marked = _markedAndUnmarked.marked,
+            unmarked = _markedAndUnmarked.unmarked;
+
         _this.setState({
-          todos: a,
+          todos: [].concat(_toConsumableArray(unmarked), _toConsumableArray(marked)),
           todoText: ""
         });
 
@@ -21019,9 +21024,9 @@ var App = function (_React$Component) {
       var a = _this.state.todos.slice();
       a[id].marked = true;
 
-      var _markedAndUnmarked = markedAndUnmarked(a),
-          marked = _markedAndUnmarked.marked,
-          unmarked = _markedAndUnmarked.unmarked;
+      var _markedAndUnmarked2 = markedAndUnmarked(a),
+          marked = _markedAndUnmarked2.marked,
+          unmarked = _markedAndUnmarked2.unmarked;
 
       var newTodos = [].concat(_toConsumableArray(unmarked), _toConsumableArray(marked));
       _this.setState({
@@ -21058,9 +21063,9 @@ var App = function (_React$Component) {
       if (a) {
         var rawTodoList = JSON.parse(a);
 
-        var _markedAndUnmarked2 = markedAndUnmarked(rawTodoList),
-            marked = _markedAndUnmarked2.marked,
-            unmarked = _markedAndUnmarked2.unmarked;
+        var _markedAndUnmarked3 = markedAndUnmarked(rawTodoList),
+            marked = _markedAndUnmarked3.marked,
+            unmarked = _markedAndUnmarked3.unmarked;
 
         this.setState({
           todos: [].concat(_toConsumableArray(unmarked), _toConsumableArray(marked))
