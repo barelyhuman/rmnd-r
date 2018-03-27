@@ -60,12 +60,15 @@ class App extends React.Component {
   };
 
   markTodo = id => {
-    var a = this.state.todos;
+    var a = this.state.todos.slice();
     a[id].marked = true;
+    const marked = a.filter(todo => todo.marked);
+    const unmarked = a.filter(todo => !todo.marked);
+    const newTodos = [...unmarked, ...marked];
     this.setState({
-      todos: a
+      todos: newTodos
     });
-    localStorage.setItem("todos", JSON.stringify(a));
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   unmarkTodo = id => {
