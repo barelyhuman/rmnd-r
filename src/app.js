@@ -82,30 +82,21 @@ class App extends React.Component {
     localStorage.setItem("todos", JSON.stringify(a));
   };
 
-  moveTodoUp = id => {
-    const todos = [...this.state.todos];
-    const currTodo = todos[id];
-    const toMoveTodo = todos[id - 1];
-    todos[id - 1] = currTodo;
-    todos[id] = toMoveTodo;
-    console.log(todos);
-    this.setState({ todos });
-  };
-
-  moveTodoDown = id => {};
-
   //Render Method
   render() {
     return (
       <div id="app">
         <Container>
-          <Input
-            elid="todo-text"
-            onChange={this.onInputChage}
-            keyPress={this.addToList}
-            value={this.state.todoText}
-            placeholder="Enter a task... "
-          />
+        <div>
+        <Input
+          elid="todo-text"
+          onChange={this.onInputChage}
+          keyPress={this.addToList}
+          value={this.state.todoText}
+          placeholder="> Add a task "
+        />
+        <div className="input-slide"></div>
+        </div>
           <Panel
             dataList={this.state.todos}
             unMark={this.unmarkTodo}

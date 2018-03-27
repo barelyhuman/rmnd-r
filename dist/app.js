@@ -21040,15 +21040,7 @@ var App = function (_React$Component) {
         todos: a
       });
       localStorage.setItem("todos", JSON.stringify(a));
-    }, _this.moveTodoUp = function (id) {
-      var todos = [].concat(_toConsumableArray(_this.state.todos));
-      var currTodo = todos[id];
-      var toMoveTodo = todos[id - 1];
-      todos[id - 1] = currTodo;
-      todos[id] = toMoveTodo;
-      console.log(todos);
-      _this.setState({ todos: todos });
-    }, _this.moveTodoDown = function (id) {}, _temp), _possibleConstructorReturn(_this, _ret);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
   //App State
 
@@ -21090,13 +21082,18 @@ var App = function (_React$Component) {
         _react2.default.createElement(
           _modules.Container,
           null,
-          _react2.default.createElement(_modules.Input, {
-            elid: "todo-text",
-            onChange: this.onInputChage,
-            keyPress: this.addToList,
-            value: this.state.todoText,
-            placeholder: "Enter a task... "
-          }),
+          _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement(_modules.Input, {
+              elid: "todo-text",
+              onChange: this.onInputChage,
+              keyPress: this.addToList,
+              value: this.state.todoText,
+              placeholder: "> Add a task "
+            }),
+            _react2.default.createElement("div", { className: "input-slide" })
+          ),
           _react2.default.createElement(_modules.Panel, {
             dataList: this.state.todos,
             unMark: this.unmarkTodo,
@@ -21255,20 +21252,6 @@ function Panel(props) {
       _react2.default.createElement(
         "div",
         { className: "btn-container" },
-        index !== 0 ? _react2.default.createElement(
-          _button2.default,
-          { onClick: function onClick() {
-              return props.changePosition.up(index);
-            } },
-          _react2.default.createElement("span", { className: "oi", "data-glyph": "arrow-thick-top" })
-        ) : null,
-        index == len - 1 ? null : _react2.default.createElement(
-          _button2.default,
-          { onClick: function onClick() {
-              return props.changePosition.down(index);
-            } },
-          _react2.default.createElement("span", { className: "oi", "data-glyph": "arrow-thick-bottom" })
-        ),
         !item.marked ? _react2.default.createElement(
           _button2.default,
           { onClick: function onClick() {
