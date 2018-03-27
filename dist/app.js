@@ -21018,12 +21018,11 @@ var App = function (_React$Component) {
     }, _this.markTodo = function (id) {
       var a = _this.state.todos.slice();
       a[id].marked = true;
-      var marked = a.filter(function (todo) {
-        return todo.marked;
-      });
-      var unmarked = a.filter(function (todo) {
-        return !todo.marked;
-      });
+
+      var _markedAndUnmarked = markedAndUnmarked(a),
+          marked = _markedAndUnmarked.marked,
+          unmarked = _markedAndUnmarked.unmarked;
+
       var newTodos = [].concat(_toConsumableArray(unmarked), _toConsumableArray(marked));
       _this.setState({
         todos: newTodos
@@ -21057,8 +21056,14 @@ var App = function (_React$Component) {
     value: function componentWillMount() {
       var a = localStorage.getItem("todos");
       if (a) {
+        var rawTodoList = JSON.parse(a);
+
+        var _markedAndUnmarked2 = markedAndUnmarked(rawTodoList),
+            marked = _markedAndUnmarked2.marked,
+            unmarked = _markedAndUnmarked2.unmarked;
+
         this.setState({
-          todos: JSON.parse(a)
+          todos: [].concat(_toConsumableArray(unmarked), _toConsumableArray(marked))
         });
       }
     }
@@ -21101,6 +21106,18 @@ var App = function (_React$Component) {
 
   return App;
 }(_react2.default.Component);
+
+function markedAndUnmarked(list) {
+  var marked = list.filter(function (item) {
+    return item.marked;
+  });
+  var unmarked = list.filter(function (item) {
+    return !item.marked;
+  });
+  return {
+    marked: marked, unmarked: unmarked
+  };
+}
 
 (0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById("root"));
 

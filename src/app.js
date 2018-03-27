@@ -14,8 +14,10 @@ class App extends React.Component {
   componentWillMount() {
     var a = localStorage.getItem("todos");
     if (a) {
+      const rawTodoList = JSON.parse(a);
+      const {marked,unmarked} = markedAndUnmarked(rawTodoList);
       this.setState({
-        todos: JSON.parse(a)
+        todos: [...unmarked,...marked]
       });
     }
   }
@@ -62,8 +64,7 @@ class App extends React.Component {
   markTodo = id => {
     var a = this.state.todos.slice();
     a[id].marked = true;
-    const marked = a.filter(todo => todo.marked);
-    const unmarked = a.filter(todo => !todo.marked);
+    const {marked,unmarked} = markedAndUnmarked(a);
     const newTodos = [...unmarked, ...marked];
     this.setState({
       todos: newTodos
@@ -115,6 +116,16 @@ class App extends React.Component {
       </div>
     );
   }
+}
+
+
+function markedAndUnmarked(list){
+  const marked = list.filter((item)=>item.marked);
+  const unmarked = list.filter((item)=>!item.marked);
+  return {
+    marked,unmarked
+  }
+
 }
 
 render(<App />, document.getElementById("root"));
