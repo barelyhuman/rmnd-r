@@ -31,8 +31,8 @@ body{
 }
 
 .input{
-    font-family: "Inconsolata";
-    font-weight: 600;
+    font-family: "Raleway",sans-serif;
+    font-weight: 700;
     padding:8px;
     outline:none;
     border:0;
@@ -99,8 +99,8 @@ body{
 
 .text{
     font-size:18px;
-    font-family: 'Inconsolata';
-    font-weight: 600;
+    font-family: "Raleway",sans-serif;
+    font-weight: 400;
     padding-right:10px;
 }
 
