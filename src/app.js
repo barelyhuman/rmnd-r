@@ -15,9 +15,8 @@ class App extends React.Component {
     var a = localStorage.getItem("todos");
     if (a) {
       const rawTodoList = JSON.parse(a);
-      const {marked,unmarked} = markedAndUnmarked(rawTodoList);
       this.setState({
-        todos: [...unmarked,...marked]
+        todos: rawTodoList
       });
     }
   }
@@ -42,9 +41,8 @@ class App extends React.Component {
         value: this.state.todoText,
         marked: false
       });
-      const {marked,unmarked}=markedAndUnmarked(a);
       this.setState({
-        todos: [...unmarked,...marked],
+        todos: a,
         todoText: ""
       });
 
@@ -65,12 +63,10 @@ class App extends React.Component {
   markTodo = id => {
     var a = this.state.todos.slice();
     a[id].marked = true;
-    const {marked,unmarked} = markedAndUnmarked(a);
-    const newTodos = [...unmarked, ...marked];
     this.setState({
-      todos: newTodos
+      todos: a
     });
-    localStorage.setItem("todos", JSON.stringify(newTodos));
+    localStorage.setItem("todos", JSON.stringify(a));
   };
 
   unmarkTodo = id => {
@@ -87,16 +83,16 @@ class App extends React.Component {
     return (
       <div id="app">
         <Container>
-        <div>
-        <Input
-          elid="todo-text"
-          onChange={this.onInputChage}
-          keyPress={this.addToList}
-          value={this.state.todoText}
-          placeholder="> Add a task "
-        />
-        <div className="input-slide"></div>
-        </div>
+          <div>
+            <Input
+              elid="todo-text"
+              onChange={this.onInputChage}
+              keyPress={this.addToList}
+              value={this.state.todoText}
+              placeholder="> Add a task "
+            />
+            <div className="input-slide" />
+          </div>
           <Panel
             dataList={this.state.todos}
             unMark={this.unmarkTodo}
@@ -108,16 +104,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
-
-
-function markedAndUnmarked(list){
-  const marked = list.filter((item)=>item.marked);
-  const unmarked = list.filter((item)=>!item.marked);
-  return {
-    marked,unmarked
-  }
-
 }
 
 render(<App />, document.getElementById("root"));

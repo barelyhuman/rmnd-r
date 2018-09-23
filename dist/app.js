@@ -20959,8 +20959,6 @@ var _modules = require("./modules/");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -21001,13 +20999,8 @@ var App = function (_React$Component) {
           value: _this.state.todoText,
           marked: false
         });
-
-        var _markedAndUnmarked = markedAndUnmarked(a),
-            marked = _markedAndUnmarked.marked,
-            unmarked = _markedAndUnmarked.unmarked;
-
         _this.setState({
-          todos: [].concat(_toConsumableArray(unmarked), _toConsumableArray(marked)),
+          todos: a,
           todoText: ""
         });
 
@@ -21023,16 +21016,10 @@ var App = function (_React$Component) {
     }, _this.markTodo = function (id) {
       var a = _this.state.todos.slice();
       a[id].marked = true;
-
-      var _markedAndUnmarked2 = markedAndUnmarked(a),
-          marked = _markedAndUnmarked2.marked,
-          unmarked = _markedAndUnmarked2.unmarked;
-
-      var newTodos = [].concat(_toConsumableArray(unmarked), _toConsumableArray(marked));
       _this.setState({
-        todos: newTodos
+        todos: a
       });
-      localStorage.setItem("todos", JSON.stringify(newTodos));
+      localStorage.setItem("todos", JSON.stringify(a));
     }, _this.unmarkTodo = function (id) {
       var a = _this.state.todos;
       a[id].marked = false;
@@ -21054,13 +21041,8 @@ var App = function (_React$Component) {
       var a = localStorage.getItem("todos");
       if (a) {
         var rawTodoList = JSON.parse(a);
-
-        var _markedAndUnmarked3 = markedAndUnmarked(rawTodoList),
-            marked = _markedAndUnmarked3.marked,
-            unmarked = _markedAndUnmarked3.unmarked;
-
         this.setState({
-          todos: [].concat(_toConsumableArray(unmarked), _toConsumableArray(marked))
+          todos: rawTodoList
         });
       }
     }
@@ -21108,18 +21090,6 @@ var App = function (_React$Component) {
 
   return App;
 }(_react2.default.Component);
-
-function markedAndUnmarked(list) {
-  var marked = list.filter(function (item) {
-    return item.marked;
-  });
-  var unmarked = list.filter(function (item) {
-    return !item.marked;
-  });
-  return {
-    marked: marked, unmarked: unmarked
-  };
-}
 
 (0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById("root"));
 
