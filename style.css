@@ -34,6 +34,14 @@
   overflow-y: auto;
 }
 
+.list-item {
+  cursor: pointer;
+}
+
+.list-item:hover {
+  color: black;
+}
+
 input[type='text']:focus {
   border-color: black;
 }
