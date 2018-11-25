@@ -1,0 +1,39 @@
+.marked {
+  text-decoration: line-through;
+}
+
+.button-black {
+  background-color: black;
+  border-color: black;
+}
+
+.button-black.button-clear,
+.button-black.button-outline {
+  background-color: transparent;
+  color: black;
+}
+
+.button-black.button-clear {
+  border-color: transparent;
+}
+
+.margin-top-15-per {
+  margin-top: 15%;
+}
+
+.margin-top-10-px {
+  margin-top: 15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.list-group {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+input[type='text']:focus {
+  border-color: black;
+}

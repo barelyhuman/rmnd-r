@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tasks</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tasks</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+  <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-    <div id="root">
+  <div class="container">
+    <div class="row margin-top-10-px">
+      <div class="column column-50 column-offset-25">
+        <h3 class="text-center">
+          Tasks <small>by reap-r</small>
+        </h3>
+      </div>
     </div>
-    <script src="./dist/app.js"></script>
-    <script>
-        var a=document.getElementById('todo-text');
-        a?a.focus():null;
-    </script>
+  </div>
+  <div class="container margin-top-15-per">
+    <div class="row">
+      <div class="column column-offset-25">
+        <div class="input-group row">
+          <div class="column column-50">
+            <input type="text" id="taskInput" name="taskInput" placeholder="Press Enter to add a Task" />
+          </div>
+          <div class="column">
+            <button class="button-black button-clear" id="clearTasks">Clear Completed</button>
+          </div>
+        </div>
+        <div class="column column-50 list-group">
+          <ul class="list" id="taskList">
+            <li class="list-item">
+              Some bloody task!Some bloody task!Some bloody task!Some bloody task!Some bloody task!Some bloody
+              task!Some
+              bloody task!Some bloody task!Some bloody task!Some bloody task!Some bloody task!Some bloody task!Some
+              bloody
+              task!Some bloody task!Some bloody task!Some bloody task!
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="./main.js"></script>
 </body>
+
 </html>
