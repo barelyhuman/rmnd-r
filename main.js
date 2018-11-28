@@ -60,6 +60,12 @@ Tasks.prototype.clearCompleted = function () {
   this.tasks = this.tasks.filter(function (item) {
     return !item.completed
   })
+
+  this.tasks = this.tasks.map(function (item, index) {
+    item.id = index;
+    return item;
+  })
+
   window.localStorage.setItem('tasks', JSON.stringify(this.tasks));
 }
 
@@ -83,6 +89,7 @@ Tasks.prototype.toggleMarked = function (taskId) {
     }
     return item;
   });
+
   window.localStorage.setItem('tasks', JSON.stringify(this.tasks));
 }
 
