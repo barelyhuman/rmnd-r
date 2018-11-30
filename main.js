@@ -12,6 +12,7 @@ function main() {
   let tasksFromStorage = window.localStorage.getItem('tasks');
   if (!tasksFromStorage) {
     tasksFromStorage = [];
+    window.localStorage.setItem('tasks', JSON.stringify(tasksFromStorage));
   }
 
   const listData = tasker.load(tasksFromStorage);
