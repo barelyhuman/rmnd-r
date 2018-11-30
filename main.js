@@ -50,7 +50,7 @@ function Tasks() {
 }
 
 Tasks.prototype.load = function (tasks) {
-  this.tasks = JSON.parse(tasks);
+  this.tasks = tasks;
   if (typeof this.tasks == 'string' || !tasks) {
     this.tasks = [];
   }
