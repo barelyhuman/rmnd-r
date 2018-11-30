@@ -10,7 +10,7 @@ function main() {
   }
 
   let tasksFromStorage = JSON.parse(window.localStorage.getItem('tasks'));
-  if (!tasksFromStorage) {
+  if (!tasksFromStorage || !tasksFromStorage.length) {
     tasksFromStorage = [];
     window.localStorage.setItem('tasks', JSON.stringify(tasksFromStorage));
   }
