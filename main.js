@@ -9,7 +9,7 @@ function main() {
     renderList('taskList', tasker.tasks, tasker);
   }
 
-  let tasksFromStorage = window.localStorage.getItem('tasks');
+  let tasksFromStorage = JSON.parse(window.localStorage.getItem('tasks'));
   if (!tasksFromStorage) {
     tasksFromStorage = [];
     window.localStorage.setItem('tasks', JSON.stringify(tasksFromStorage));
