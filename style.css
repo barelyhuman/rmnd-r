@@ -13,14 +13,19 @@ body {
   border-color: black;
 }
 
+.button-black.button-clear {
+  border-color: transparent;
+}
+
 .button-black.button-clear,
 .button-black.button-outline {
   background-color: transparent;
   color: black;
 }
 
-.button-black.button-clear {
-  border-color: transparent;
+.button-black.button-clear:hover,
+.button-black.button-outline:hover{
+  color: #50a586 ;
 }
 
 .margin-top-15-per {
@@ -45,9 +50,21 @@ body {
 }
 
 .list-item:hover {
-  color: black;
+  color: #50a586;
 }
 
 input[type='text']:focus {
-  border-color: black;
+  border-color: #50a586;
+  color: #50a586 !important;
+}
+
+
+a {
+  color: #50a586;
+  text-decoration: none;
+}
+
+a:focus, a:hover {
+  color: #50a586;
+  text-decoration: underline;
 }
