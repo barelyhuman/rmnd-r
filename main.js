@@ -1,21 +1,33 @@
-function main() {
-  const tasker = new Tasks();
-  const taskInput = document.querySelector('#taskInput');
+const tasker = new Tasks();
 
+function main() {
+
+  const taskInput = document.querySelector('#taskInput');
   const clearTasks = document.querySelector('#clearTasks');
+  const shareTasks = document.querySelector('#shareTasks');
+  let listData = [];
+
+  shareTasks.onclick = function () {
+    generateShareLink();
+  }
 
   clearTasks.onclick = function () {
     tasker.clearCompleted();
     renderList('taskList', tasker.tasks, tasker);
   }
 
-  let tasksFromStorage = JSON.parse(window.localStorage.getItem('tasks'));
-  if (!tasksFromStorage || !tasksFromStorage.length) {
-    tasksFromStorage = [];
-    window.localStorage.setItem('tasks', JSON.stringify(tasksFromStorage));
+
+  if (getTasksFromURL()) {
+    listData = tasker.getAll();
+  } else {
+    let tasksFromStorage = JSON.parse(window.localStorage.getItem('tasks'));
+    if (!tasksFromStorage || !tasksFromStorage.length) {
+      tasksFromStorage = [];
+      window.localStorage.setItem('tasks', JSON.stringify(tasksFromStorage));
+    }
+    listData = tasker.load(tasksFromStorage);
   }
 
-  const listData = tasker.load(tasksFromStorage);
   renderList('taskList', listData, tasker);
   taskInput.addEventListener('keyup', function (event) {
     if (event.keyCode == 13) {
@@ -24,10 +36,9 @@ function main() {
       event.target.value = '';
     }
   })
-
 }
 
-function renderList(listId, data, tasker) {
+function renderList(listId, data) {
   const lists = document.querySelector("#" + listId);
   lists.innerHTML = '';
   data.forEach(function (listItem) {
@@ -45,64 +56,41 @@ function renderList(listId, data, tasker) {
   });
 }
 
-function Tasks() {
-  this.tasks = [];
+
+function generateShareLink() {
+  const url = window.location.href + '#' + CONSTANTS.QUERYSHARE + '=' + tasker.getAllAsBase64();
+  copyShareLink(url);
+  showToast("Shareable link, copied to clipboard");
 }
 
-Tasks.prototype.load = function (tasks) {
-  this.tasks = tasks;
-  if (typeof this.tasks == 'string' || !tasks) {
-    this.tasks = [];
+function copyShareLink(shareUrl) {
+  const el = document.createElement('textarea');
+  el.value = shareUrl;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+}
+
+function getTasksFromURL() {
+  const params = window.location.hash.replace('#', '').split('=');
+  if (params[0] === CONSTANTS.QUERYSHARE) {
+    const tasksString = params[1];
+    const done = tasker.setTasksFromBase64(tasksString);
+    return done;
   }
-  return this.tasks;
+  return false;
 }
 
-Tasks.prototype.clearCompleted = function () {
-  this.tasks = this.tasks.filter(function (item) {
-    return !item.completed
-  })
-
-  this.tasks = this.tasks.map(function (item, index) {
-    item.id = index;
-    return item;
-  })
-
-  window.localStorage.setItem('tasks', JSON.stringify(this.tasks));
-}
-
-Tasks.prototype.create = function (taskText) {
-  if (!taskText) {
-    return;
-  }
-  const id = this.tasks.length;
-  this.tasks.push({
-    id: id,
-    text: taskText,
-    completed: false
-  });
-  window.localStorage.setItem('tasks', JSON.stringify(this.tasks));
-}
-
-Tasks.prototype.toggleMarked = function (taskId) {
-  this.tasks = this.tasks.map(function (item) {
-    if (item.id === taskId) {
-      item.completed = !item.completed;
-    }
-    return item;
-  });
-
-  window.localStorage.setItem('tasks', JSON.stringify(this.tasks));
-}
-
-
-Tasks.prototype.delete = function (taskId) {
-  this.tasks = this.tasks.filter(function (item) {
-    if (item.id !== taskId) {
-      return true;
-    }
-    return false;
-  });
-  window.localStorage.setItem('tasks', JSON.stringify(this.tasks));
+function showToast(text) {
+  Toastify({
+    text,
+    duration: 3000,
+    gravity: "top",
+    position: 'right',
+    backgroundColor: "#131313",
+    stopOnFocus: true,
+  }).showToast();
 }
 
 

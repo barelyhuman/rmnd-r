@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
   <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -32,6 +33,9 @@
           <div class="column">
             <button class="button-black button-clear" id="clearTasks">Clear Completed</button>
           </div>
+          <div class="column">
+            <button class="button-black button-clear" id="shareTasks">Share</button>
+          </div>
         </div>
         <div class="column list-group">
           <ul class="list" id="taskList">
@@ -40,6 +44,9 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="./constants.js"></script>
+  <script src="./tasks.js"></script>
   <script src="./main.js"></script>
 </body>
 
