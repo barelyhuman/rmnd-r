@@ -1,5 +1,6 @@
 body {
   background-color: #fff;
+  font-family: 'Space Mono',monospace;
 }
 
 .marked {
@@ -7,6 +8,7 @@ body {
 }
 
 .button-black {
+  font-family: 'Exo 2',sans-serif;
   background-color: black;
   border-color: black;
 }
