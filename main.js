@@ -63,7 +63,6 @@ function generateShareLink() {
     setTimeout(() => {
         copyShareLink(url);
         showToast("Shareable link, copied to clipboard");
-        window.location.hash = "";
     }, 200);
 }
 
