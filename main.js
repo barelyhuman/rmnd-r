@@ -58,10 +58,12 @@ function renderList(listId, data) {
 
 
 function generateShareLink() {
-    const url = window.location.origin + '/#' + tasker.getAllAsBase64();
+    window.location.hash = tasker.getAllAsBase64();
+    const url = window.location.href;
     setTimeout(() => {
         copyShareLink(url);
         showToast("Shareable link, copied to clipboard");
+        window.location.hash = "";
     }, 200);
 }
 
@@ -76,9 +78,12 @@ function copyShareLink(shareUrl) {
 
 function getTasksFromURL() {
     const params = window.location.hash.replace('#', '');
-    const tasksString = params;
-    const done = tasker.setTasksFromBase64(tasksString);
-    return done;
+    if (params.length) {
+        const tasksString = params;
+        const done = tasker.setTasksFromBase64(tasksString);
+        return done;
+    }
+    return false;
 }
 
 function showToast(text) {
