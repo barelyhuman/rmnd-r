@@ -1,3 +1,3 @@
 const CONSTANTS = {
-    QUERYSHARE: 'share'
+ 
 }

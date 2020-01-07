@@ -64,6 +64,7 @@ Tasks.prototype.getAll = function () {
 
 Tasks.prototype.getAllAsBase64 = function () {
     let objJsonStr = JSON.stringify(this.tasks);
+    console.log({tasks:this.tasks});
     return btoa(objJsonStr);
 }
 
