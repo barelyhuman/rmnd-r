@@ -1,7 +1,7 @@
 const tasker = new Tasks();
 
 function main() {
-
+    feather.replace();
     const taskInput = document.querySelector('#taskInput');
     const clearTasks = document.querySelector('#clearTasks');
     const shareTasks = document.querySelector('#shareTasks');

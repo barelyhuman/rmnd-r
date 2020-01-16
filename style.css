@@ -68,3 +68,26 @@ a:focus, a:hover {
   color: #50a586;
   text-decoration: underline;
 }
+
+button.icon-button{
+  margin:0px;
+  padding:5px 10px;
+  outline:none;
+  border:none;
+  background:transparent;
+  color:#606c76;
+}
+
+button.icon-button:hover{
+  outline:none;
+  border:none;
+  background:transparent;
+  color:#50a586;
+}
+
+button.icon-type:focus{
+  outline:none;
+  border:none;
+  background:transparent;
+  color:#50a586;
+}
