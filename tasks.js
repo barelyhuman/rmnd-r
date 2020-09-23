@@ -42,7 +42,7 @@ Tasks.prototype.toggleMarked = function (taskId) {
             item.completed = !item.completed;
         }
         return item;
-    }).sort((x,y)=>x.completed-y.completed;
+    }).sort((x,y)=>x.completed-y.completed);
 
     window.localStorage.setItem('tasks', JSON.stringify(this.tasks));
 }
