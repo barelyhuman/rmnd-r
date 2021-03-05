@@ -288,3 +288,7 @@ input.large {
   background: var(--fg-light);
   color: var(--bg-light);
 }
+
+.no-wrap{
+  white-space: nowrap;
+}
