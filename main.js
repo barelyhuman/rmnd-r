@@ -1,5 +1,7 @@
 const tasker = new Tasks();
 
+showVisitNewToast();
+
 function main() {
     feather.replace();
     const taskInput = document.querySelector('#taskInput');
@@ -94,6 +96,20 @@ function showToast(text) {
         backgroundColor: "#131313",
         stopOnFocus: true,
     }).showToast();
+}
+
+function showVisitNewToast(){
+    Toastify({
+        text: "Try the new version?",
+        duration: -1,
+        destination: "https://todo.reaper.im",
+        newWindow: true,
+        close: true,
+        gravity: "top", 
+        position: "right", 
+        backgroundColor: "#000",
+        stopOnFocus: true, 
+      }).showToast();
 }
 
 
