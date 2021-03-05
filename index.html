@@ -1,62 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Todo</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>rmnd-r</title>
-  <link href="https://fonts.googleapis.com/css?family=Exo+2|Space+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css" />
-  <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css" />
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
-  <link rel="stylesheet" href="./style.css" />
-</head>
-
-<body>
-  <div class="container">
-    <div class="row margin-top-10-px">
-      <div class="column column-50 column-offset-25">
-        <h3 class="text-center">
-          rmnd-r
-          <small>
-            by
-            <a target="blank" href="https://siddharthgelera.com">reap-r</a>
-          </small>
-        </h3>
-        <p class="text-center">
-          A Minimal Task List
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="container margin-top-15-per">
-    <div class="row">
-      <div class="column">
-        <div class="input-group row">
-          <div class="column column-75">
-            <input type="text" id="taskInput" name="taskInput" placeholder="Press Enter to add a Task" />
-          </div>
+  <body>
+    <div class="container-boundaries sticky sticky-header bg-default">
+      <header>
+        <div class="flex flex-center">
           <div>
-            <button class="icon-button" title="Clear Completed Tasks" id="clearTasks">
-              <i data-feather="delete"></i>
-            </button>
-            <button class="icon-button" title="Share List" id="shareTasks">
-              <i data-feather="share-2"></i>
+            <h3>
+              Todo
+              <br />
+              <small class="fw-normal">A Minimalist's Task List</small>
+            </h3>
+            <p></p>
+          </div>
+          <div class="ml-auto">
+            <button id="darkModeToggle" class="no-border icon">
+              dark mode
             </button>
           </div>
         </div>
-        <div class="column list-group">
-          <ul class="list" id="taskList"></ul>
-        </div>
-      </div>
+      </header>
     </div>
-  </div>
-  <script type="text/javascript" src="https://unpkg.com/feather-icons@4.25.0/dist/feather.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <script src="./constants.js"></script>
-  <script src="./tasks.js"></script>
-  <script src="./main.js"></script>
-</body>
-
+    <div class="container-boundaries sticky sticky-input bg-default pb-2">
+      <div class="flex justify-end mb-2">
+        <button class="mr-auto no-border secondary" id="todoFilterToggle" data-mode="-1">Showing: All</button>
+        <button
+          class="icon no-border"
+          title="Clear Completed Tasks"
+          id="clearTasks"
+        ></button>
+        <button
+          class="icon no-border"
+          title="Share List"
+          id="shareTasks"
+        ></button>
+      </div>
+      <input
+        class="large w-100"
+        type="text"
+        id="taskInput"
+        name="taskInput"
+        placeholder="Press Enter to add a Task"
+      />
+    </div>
+    <div class="container container-boundaries">
+      <ul class="list" id="taskList"></ul>
+    </div>
+    <footer>
+      <div class="container-boundaries text-center fw-bold">
+        2021 &copy;
+        <a target="blank" href="https://reaper.im">Reaper</a>
+      </div>
+    </footer>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/feather-icons@4.28.0/dist/feather.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script src="./constants.js"></script>
+    <script src="./tasks.js"></script>
+    <script src="./main.js"></script>
+  </body>
 </html>
