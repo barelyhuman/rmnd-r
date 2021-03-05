@@ -19,13 +19,12 @@ function main() {
   var theme,
     prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
-  if (prefersDarkScheme.matches) {
+  if (prefersDarkScheme.matches && !defaultTheme) {
     defaultTheme = 'dark';
-  }
-  if (!defaultTheme) {
+  } else if (!defaultTheme) {
     defaultTheme = 'light';
+    localStorage.setItem('theme', defaultTheme);
   }
-  localStorage.setItem('theme', defaultTheme);
 
   setTheme(defaultTheme);
 
@@ -155,7 +154,7 @@ function showToast(text) {
     duration: 3000,
     gravity: 'top',
     position: 'right',
-    className: "toast",
+    className: 'toast',
     stopOnFocus: true,
   }).showToast();
 }
@@ -180,6 +179,7 @@ function dispatchForCode(event, match, callback) {
 
 function setTheme(theme) {
   const darkModeToggle = document.getElementById('darkModeToggle');
+  const metaThemeColor = document.getElementById('themeColor');
   const sunIcon = feather.icons['sun'].toSvg({
     fill: 'currentColor',
     height: 18,
@@ -194,10 +194,12 @@ function setTheme(theme) {
     darkModeToggle.innerHTML = moonIcon;
     document.body.removeAttribute('data-dark-mode');
     localStorage.setItem('theme', 'light');
+    metaThemeColor.content = '#eceff4';
   }
   if (theme === 'dark') {
     darkModeToggle.innerHTML = sunIcon;
     document.body.setAttribute('data-dark-mode', 'dark');
     localStorage.setItem('theme', 'dark');
+    metaThemeColor.content = '#121212';
   }
 }

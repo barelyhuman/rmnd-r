@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="favicon.png">
+    <link rel="icon" href="favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta id="themeColor" name="theme-color" content="#121212" />
     <title>Todo</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -21,7 +23,25 @@
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
     <link rel="stylesheet" href="./style.css" />
-    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="barelyhuman" data-description="Support me on Buy me a coffee!" data-message="" data-color="#BF616A" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+    <script type="module">
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js');
+      }
+    </script>
+
+    <script
+      data-name="BMC-Widget"
+      data-cfasync="false"
+      src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+      data-id="barelyhuman"
+      data-description="Support me on Buy me a coffee!"
+      data-message=""
+      data-color="#BF616A"
+      data-position="Right"
+      data-x_margin="18"
+      data-y_margin="18"
+    ></script>
   </head>
 
   <body>
@@ -46,7 +66,13 @@
     </div>
     <div class="container-boundaries sticky sticky-input bg-default pb-2">
       <div class="flex justify-end mb-2">
-        <button class="mr-auto no-border secondary" id="todoFilterToggle" data-mode="-1">Showing: All</button>
+        <button
+          class="mr-auto no-border secondary"
+          id="todoFilterToggle"
+          data-mode="-1"
+        >
+          Showing: All
+        </button>
         <button
           class="icon no-border"
           title="Clear Completed Tasks"
