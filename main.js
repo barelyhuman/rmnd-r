@@ -1,5 +1,5 @@
 const tasker = new Tasks();
-
+const themer = new Themer({ trigger: '#darkModeToggle' });
 function main() {
   const shareIcon = feather.icons['share-2'].toSvg({ height: 18, width: 18 });
   const deleteIcon = feather.icons['delete'].toSvg({ height: 18, width: 18 });
@@ -7,26 +7,12 @@ function main() {
   const taskInput = document.getElementById('taskInput');
   const clearTasks = document.getElementById('clearTasks');
   const shareTasks = document.getElementById('shareTasks');
-  const darkModeToggle = document.getElementById('darkModeToggle');
   const todoFilterToggle = document.getElementById('todoFilterToggle');
 
   let listData = [];
 
   clearTasks.innerHTML = deleteIcon;
   shareTasks.innerHTML = shareIcon;
-
-  let defaultTheme = localStorage.getItem('theme');
-  var theme,
-    prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-  if (prefersDarkScheme.matches && !defaultTheme) {
-    defaultTheme = 'dark';
-  } else if (!defaultTheme) {
-    defaultTheme = 'light';
-    localStorage.setItem('theme', defaultTheme);
-  }
-
-  setTheme(defaultTheme);
 
   shareTasks.onclick = function () {
     generateShareLink();
@@ -35,14 +21,6 @@ function main() {
   clearTasks.onclick = function () {
     tasker.clearCompleted();
     renderList('taskList', tasker.tasks, tasker);
-  };
-
-  darkModeToggle.onclick = function () {
-    const isDark = document.body.hasAttribute('data-dark-mode');
-    if (isDark) {
-      return setTheme('light');
-    }
-    setTheme('dark');
   };
 
   todoFilterToggle.onclick = function () {
@@ -174,32 +152,5 @@ function dispatchForCode(event, match, callback) {
 
   if (match.indexOf(code) > -1) {
     callback(code);
-  }
-}
-
-function setTheme(theme) {
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  const metaThemeColor = document.getElementById('themeColor');
-  const sunIcon = feather.icons['sun'].toSvg({
-    fill: 'currentColor',
-    height: 18,
-    width: 18,
-  });
-  const moonIcon = feather.icons['moon'].toSvg({
-    fill: 'currentColor',
-    height: 18,
-    width: 18,
-  });
-  if (theme === 'light') {
-    darkModeToggle.innerHTML = moonIcon;
-    document.body.removeAttribute('data-dark-mode');
-    localStorage.setItem('theme', 'light');
-    metaThemeColor.content = '#eceff4';
-  }
-  if (theme === 'dark') {
-    darkModeToggle.innerHTML = sunIcon;
-    document.body.setAttribute('data-dark-mode', 'dark');
-    localStorage.setItem('theme', 'dark');
-    metaThemeColor.content = '#121212';
   }
 }
