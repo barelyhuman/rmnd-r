@@ -45,6 +45,13 @@
   </head>
 
   <body>
+    <div id="editModeBanner" class="floating-banner flex hidden flex-center">
+      <p class="content text-center">
+        Edit Mode: Active
+        <br />
+        <small class="fw-bold">Click on a task to edit it , or the trash icon to delete it</small>
+      </p>
+    </div>
     <div class="container-boundaries sticky sticky-header bg-default">
       <header>
         <div class="flex flex-center">
@@ -71,6 +78,12 @@
         >
           Showing: All
         </button>
+
+        <button
+          class="icon no-border"
+          title="Edit Tasks"
+          id="editTasks"
+        ></button>
         <button
           class="icon no-border"
           title="Clear Completed Tasks"

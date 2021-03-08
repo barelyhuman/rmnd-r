@@ -1,9 +1,30 @@
 const tasker = new Tasks();
 const themer = new Themer({ trigger: '#darkModeToggle' });
+
+function EditMode() {
+  let editMode = false;
+
+  function get() {
+    return editMode;
+  }
+
+  function set(value) {
+    if (typeof value != 'boolean') {
+      throw new Error('Invalid value for setted, EditMode');
+    }
+    editMode = value;
+  }
+
+  this.set = set;
+  this.get = get;
+}
+
+const editModeHandler = new EditMode();
+
 function main() {
   const shareIcon = feather.icons['share-2'].toSvg({ height: 18, width: 18 });
   const deleteIcon = feather.icons['delete'].toSvg({ height: 18, width: 18 });
-
+  const editIcon = feather.icons['edit-3'].toSvg({ height: 18, width: 18 });
   const taskInput = document.getElementById('taskInput');
   const clearTasks = document.getElementById('clearTasks');
   const shareTasks = document.getElementById('shareTasks');
@@ -13,15 +34,25 @@ function main() {
 
   clearTasks.innerHTML = deleteIcon;
   shareTasks.innerHTML = shareIcon;
+  editTasks.innerHTML = editIcon;
 
-  shareTasks.onclick = function () {
+  shareTasks.addEventListener('click', function () {
     generateShareLink();
-  };
+  });
 
-  clearTasks.onclick = function () {
+  clearTasks.addEventListener('click', function () {
     tasker.clearCompleted();
     renderList('taskList', tasker.tasks, tasker);
-  };
+  });
+
+  editTasks.addEventListener('click', function () {
+    if (editModeHandler.get()) {
+      toggleEditList(editModeHandler, false);
+    } else {
+      toggleEditList(editModeHandler, true);
+    }
+    renderList('taskList', tasker.tasks, tasker);
+  });
 
   todoFilterToggle.onclick = function () {
     const mode = todoFilterToggle.getAttribute('data-mode');
@@ -71,7 +102,29 @@ function main() {
   });
 }
 
+function toggleEditList(handler, toValue) {
+  const editIcon = feather.icons['edit-3'].toSvg({ height: 18, width: 18 });
+  const cancelIcon = feather.icons.x.toSvg({ height: 18, width: 18 });
+  if (toValue === true) {
+    editTasks.innerHTML = cancelIcon;
+    document.getElementById('editModeBanner').classList.remove('hidden');
+    document.getElementById('editModeBanner').classList.add('slide-in-flex');
+  }
+  if (toValue === false) {
+    editTasks.innerHTML = editIcon;
+    document.getElementById('editModeBanner').classList.add('hidden');
+    document.getElementById('editModeBanner').classList.remove('slide-in-flex');
+  }
+  handler.set(toValue);
+}
+
 function renderList(listId, data) {
+  const trashIcon = feather.icons['trash'].toSvg({
+    height: 20,
+    width: 20,
+    stroke: '#BF616A',
+    'stroke-width': '3px',
+  });
   const checkIcon = feather.icons['check'].toSvg({
     height: 20,
     width: 20,
@@ -81,18 +134,58 @@ function renderList(listId, data) {
   lists.innerHTML = '';
   data.forEach(function (listItem) {
     const listItemLI = document.createElement('li');
-    const iconSpan = document.createElement('span');
+    const preIconSpan = document.createElement('span');
+    const textContainer = document.createElement('p');
+    const postIconSpan = document.createElement('span');
     listItemLI.classList.add('list-item');
     if (listItem.completed) {
       listItemLI.classList.add('marked');
-      iconSpan.innerHTML = checkIcon;
+      preIconSpan.innerHTML = checkIcon;
     }
-    listItemLI.innerText = listItem.text;
-    listItemLI.append(iconSpan);
-    listItemLI.onclick = function () {
-      tasker.toggleMarked(listItem.id);
-      renderList(listId, tasker.tasks, tasker);
-    };
+
+    if (editModeHandler.get()) {
+      postIconSpan.innerHTML = trashIcon;
+      postIconSpan.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tasker.delete(listItem.id);
+        renderList(listId, tasker.tasks, tasker);
+      });
+    }
+
+    textContainer.innerText = listItem.text;
+    listItemLI.append(preIconSpan);
+    listItemLI.append(textContainer);
+    listItemLI.append(postIconSpan);
+
+    listItemLI.addEventListener('click', function () {
+      if (editModeHandler.get()) {
+        const temporaryInput = document.createElement('input');
+        temporaryInput.classList.add('large');
+        temporaryInput.classList.add('w-100');
+
+        temporaryInput.addEventListener('keyup', function (inputEvent) {
+          dispatchForCode(inputEvent, [13, 'Enter'], function () {
+            listItem.text = inputEvent.target.value;
+            toggleEditList(editModeHandler, false);
+            renderList('taskList', tasker.tasks, tasker);
+          });
+
+          dispatchForCode(inputEvent, [27, 'Escape'], function () {
+            toggleEditList(editModeHandler, false);
+            renderList('taskList', tasker.tasks, tasker);
+          });
+        });
+
+        temporaryInput.value = listItem.text;
+        listItemLI.innerText = '';
+        listItemLI.append(temporaryInput);
+        temporaryInput.focus();
+      } else {
+        tasker.toggleMarked(listItem.id);
+        renderList(listId, tasker.tasks, tasker);
+      }
+    });
+
     lists.appendChild(listItemLI);
   });
 }
