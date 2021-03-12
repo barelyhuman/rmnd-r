@@ -25,9 +25,12 @@ function main() {
   const shareIcon = feather.icons['share-2'].toSvg({ height: 18, width: 18 });
   const deleteIcon = feather.icons['delete'].toSvg({ height: 18, width: 18 });
   const editIcon = feather.icons['edit-3'].toSvg({ height: 18, width: 18 });
+  const newIcon = feather.icons['plus'].toSvg({ height: 18, width: 18 });
+
   const taskInput = document.getElementById('taskInput');
   const clearTasks = document.getElementById('clearTasks');
   const shareTasks = document.getElementById('shareTasks');
+  const newTaskList = document.getElementById('newTaskList');
   const todoFilterToggle = document.getElementById('todoFilterToggle');
 
   let listData = [];
@@ -35,6 +38,7 @@ function main() {
   clearTasks.innerHTML = deleteIcon;
   shareTasks.innerHTML = shareIcon;
   editTasks.innerHTML = editIcon;
+  newTaskList.innerHTML = newIcon;
 
   shareTasks.addEventListener('click', function () {
     generateShareLink();
@@ -52,6 +56,16 @@ function main() {
       toggleEditList(editModeHandler, true);
     }
     renderList('taskList', tasker.tasks, tasker);
+  });
+
+  newTaskList.addEventListener('click', function () {
+    const newListTasker = new Tasks();
+    window.location.hash = newListTasker.getAllAsBase64();
+    const url = window.location.href;
+    window.open(url, '_blank');
+    setTimeout(() => {
+      showToast('Opening an empty task list');
+    }, 0);
   });
 
   todoFilterToggle.onclick = function () {
