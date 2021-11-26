@@ -16,12 +16,12 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Nanum Gothic', -apple-system, BlinkMacSystemFont, Segoe UI,
+  font-family: "Nanum Gothic", -apple-system, BlinkMacSystemFont, Segoe UI,
     Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
 }
 
-body[data-dark-mode='dark'] {
+body[data-dark-mode="dark"] {
   --bg: #121212;
   --bg-light: #191919;
   --bg-lighter: #252525;
@@ -100,12 +100,12 @@ footer {
 
 /* Dark Mode Resets */
 
-body[data-dark-mode] button:hover {
+body[data-dark-mode="dark"] button:hover {
   background: var(--fg);
   color: var(--bg);
 }
 
-body[data-dark-mode] input {
+body[data-dark-mode="dark"] input {
   background: #191919;
   color: var(--fg);
 }
@@ -313,7 +313,7 @@ input.large {
 }
 
 .floating-banner > .content {
-  margin:8px;
+  margin: 8px;
   border-radius: 8px;
   background: var(--accent);
   color: var(--white);
